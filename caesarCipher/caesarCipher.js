@@ -10,6 +10,13 @@ export default function caesarCipher(string, shift) {
             return false;
         }
         return true;
+    }
+
+    function shiftChar(char) {
+        if (char.charCodeAt(0) < lowerCase) { // then it's an uppercase letter
+            return ((char.charCodeAt(0) - upperCase + shift) % 26) + upperCase;
+        } 
+        return ((char.charCodeAt(0) - lowerCase + shift) % 26) + lowerCase;
     } 
 
     function transform(str) {
@@ -23,11 +30,7 @@ export default function caesarCipher(string, shift) {
             let shiftedCharCode;
 
             if (isLetter(char)) {
-                if (char.charCodeAt(0) < lowerCase) { // then it's an uppercase letter
-                    shiftedCharCode = ((char.charCodeAt(0) - upperCase + shift) % 26) + upperCase;
-                } else {
-                    shiftedCharCode = ((char.charCodeAt(0) - lowerCase + shift) % 26) + lowerCase;
-                }
+                shiftedCharCode = shiftChar(char);
             } else {
                 shiftedCharCode = char.charCodeAt(0);
             }
